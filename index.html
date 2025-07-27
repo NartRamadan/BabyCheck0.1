@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyCheck - מעקב תינוקות</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(135deg, #FFE4E6 0%, #E8F4FD 50%, #FFF9E6 100%);
+            min-height: 100vh;
+            direction: rtl;
+            color: #4A5568;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF69B4 0%, #87CEEB 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-subtitle {
+            font-size: 1.2rem;
+            color: #6B7280;
+            margin-bottom: 40px;
+        }
+
+        .login-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 20px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Heebo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-height: 70px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFB6C1 0%, #87CEEB 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #F0E68C 0%, #DDA0DD 100%);
+            color: #4A5568;
+        }
+
+        .login-icon {
+            font-size: 24px;
+        }
+
+        .demo-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #6B7280;
+            text-align: right;
+        }
+
+        .demo-info strong {
+            color: #4A5568;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .auth-screen {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .auth-title {
+            font-size: 2rem;
+            color: #4A5568;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4A5568;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #E2E8F0;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: 'Heebo', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FFB6C1;
+            box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.1);
+        }
+
+        .btn-back {
+            background: #E2E8F0;
+            color: #4A5568;
+            padding: 10px 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: #E53E3E;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #C6F6D5 0%, #E6FFFA 100%);
+            color: #22543D;
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 500;
+            border: 2px solid #68D391;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen">
+            <h1 class="login-title">BabyCheck</h1>
+            <p class="login-subtitle">מערכת מעקב תינוקות במעון יום</p>
+            
+            <div class="login-buttons">
+                <button class="btn btn-primary" onclick="showAuth('staff')">
+                    <span class="login-icon">👩‍🏫</span>
+                    כניסת צוות המעון
+                </button>
+                
+                <button class="btn btn-secondary" onclick="showAuth('parent')">
+                    <span class="login-icon">👨‍👩‍👧‍👦</span>
+                    כניסת הורים
+                </button>
+            </div>
+
+            <div class="demo-info">
+                <strong>פרטי התחברות לדמו:</strong><br/>
+                <strong>צוות:</strong> מנהלת / 123456<br/>
+                <strong>הורים:</strong> PARENT001 / noa123<br/>
+                PARENT002 / ariel123<br/>
+                PARENT003 / tamar123<br/>
+                PARENT004 / yonatan123
+            </div>
+        </div>
+
+        <!-- Authentication Screen -->
+        <div id="authScreen" class="auth-screen hidden">
+            <button class="btn btn-back" onclick="showLogin()">← חזרה</button>
+            <h2 class="auth-title" id="authTitle">כניסת צוות המעון</h2>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" id="usernameLabel">שם משתמש</label>
+                    <input type="text" id="username" class="form-input" placeholder="הכנס שם משתמש" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">סיסמה</label>
+                    <input type="password" id="password" class="form-input" placeholder="הכנס סיסמה" required>
+                </div>
+                <div id="errorMessage" class="error-message hidden"></div>
+                <button type="submit" class="btn btn-primary">התחבר</button>
+            </form>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="successScreen" class="hidden">
+            <div class="success-message">
+                <h2>🎉 ברוכים הבאים למערכת BabyCheck!</h2>
+                <p>התחברת בהצלחה למערכת מעקב התינוקות החמימותית שלנו</p>
+                <br>
+                <p><strong>המערכת כוללת:</strong></p>
+                <p>✨ מעקב אחר 4 תינוקות: נועה, אריאל, תמר, יונתן</p>
+                <p>📋 6 פעילויות יומיות לכל תינוק</p>
+                <p>🎒 ניהול ציוד אישי</p>
+                <p>🔐 הרשאות מבוססות תפקיד</p>
+                <p>🎨 עיצוב חמימותי ופסטלי</p>
+            </div>
+            <button class="btn btn-secondary" onclick="showLogin()">חזרה למסך הראשי</button>
+        </div>
+    </div>
+
+    <script>
+        let currentUserType = 'staff';
+
+        // Mock users database
+        const users = {
+            staff: {
+                'מנהלת': '123456',
+                'גננת1': 'password'
+            },
+            parent: {
+                'PARENT001': 'noa123',
+                'PARENT002': 'ariel123',
+                'PARENT003': 'tamar123',
+                'PARENT004': 'yonatan123'
+            }
+        };
+
+        function showAuth(userType) {
+            currentUserType = userType;
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('authScreen').classList.remove('hidden');
+            
+            if (userType === 'staff') {
+                document.getElementById('authTitle').textContent = 'כניסת צוות המעון';
+                document.getElementById('usernameLabel').textContent = 'שם משתמש';
+                document.getElementById('username').placeholder = 'הכנס שם משתמש';
+            } else {
+                document.getElementById('authTitle').textContent = 'כניסת הורים';
+                document.getElementById('usernameLabel').textContent = 'קוד הורה';
+                document.getElementById('username').placeholder = 'הכנס קוד הורה (לדוגמה: PARENT001)';
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('errorMessage').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (users[currentUserType][username] === password) {
+                document.getElementById('authScreen').classList.add('hidden');
+                document.getElementById('successScreen').classList.remove('hidden');
+                errorDiv.classList.add('hidden');
+            } else {
+                errorDiv.textContent = currentUserType === 'staff' ? 
+                    'שם משתמש או סיסמה שגויים' : 
+                    'קוד הורה או סיסמה שגויים';
+                errorDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
