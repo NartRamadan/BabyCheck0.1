@@ -71,42 +71,110 @@ const initialBabies = [
   }
 ];
 
+// Initial state for parents
+const initialParents = [
+  {
+    id: 1,
+    name: 'שרה כהן',
+    parentCode: 'PARENT001',
+    email: 'sara@example.com',
+    phone: '050-1234567'
+  },
+  {
+    id: 2,
+    name: 'דני לוי',
+    parentCode: 'PARENT002',
+    email: 'danny@example.com',
+    phone: '052-7654321'
+  },
+  {
+    id: 3,
+    name: 'מירי אברהם',
+    parentCode: 'PARENT003',
+    email: 'miri@example.com',
+    phone: '053-9876543'
+  },
+  {
+    id: 4,
+    name: 'רון גולן',
+    parentCode: 'PARENT004',
+    email: 'ron@example.com',
+    phone: '054-1357924'
+  }
+];
+
 // Reducer for managing babies state
-function babiesReducer(state, action) {
+// Reducer for managing state
+function dataReducer(state, action) {
   switch (action.type) {
     case 'UPDATE_ACTIVITY':
-      return state.map(baby =>
-        baby.id === action.babyId
-          ? {
-              ...baby,
-              activities: {
-                ...baby.activities,
-                [action.activity]: action.value
-              },
-              lastUpdated: new Date().toISOString()
-            }
-          : baby
-      );
+      return {
+        ...state,
+        babies: state.babies.map(baby =>
+          baby.id === action.babyId
+            ? {
+                ...baby,
+                activities: {
+                  ...baby.activities,
+                  [action.activity]: action.value
+                },
+                lastUpdated: new Date().toISOString()
+              }
+            : baby
+        )
+      };
     case 'ADD_EQUIPMENT':
-      return state.map(baby =>
-        baby.id === action.babyId
-          ? {
-              ...baby,
-              equipment: [...baby.equipment, action.item],
-              lastUpdated: new Date().toISOString()
-            }
-          : baby
-      );
+      return {
+        ...state,
+        babies: state.babies.map(baby =>
+          baby.id === action.babyId
+            ? {
+                ...baby,
+                equipment: [...baby.equipment, action.item],
+                lastUpdated: new Date().toISOString()
+              }
+            : baby
+        )
+      };
     case 'REMOVE_EQUIPMENT':
-      return state.map(baby =>
-        baby.id === action.babyId
-          ? {
-              ...baby,
-              equipment: baby.equipment.filter((_, index) => index !== action.index),
-              lastUpdated: new Date().toISOString()
-            }
-          : baby
-      );
+      return {
+        ...state,
+        babies: state.babies.map(baby =>
+          baby.id === action.babyId
+            ? {
+                ...baby,
+                equipment: baby.equipment.filter((_, index) => index !== action.index),
+                lastUpdated: new Date().toISOString()
+              }
+            : baby
+        )
+      };
+    case 'ADD_PARENT':
+      return {
+        ...state,
+        parents: [...state.parents, action.parent]
+      };
+    case 'UPDATE_PARENT':
+      return {
+        ...state,
+        parents: state.parents.map(parent =>
+          parent.id === action.parentId ? { ...parent, ...action.updates } : parent
+        )
+      };
+    case 'ADD_BABY':
+      return {
+        ...state,
+        babies: [...state.babies, action.baby]
+      };
+    case 'UPDATE_BABY_PARENT':
+      return {
+        ...state,
+        babies: state.babies.map(baby =>
+          baby.id === action.babyId
+            ? { ...baby, parentCode: action.parentCode, lastUpdated: new Date().toISOString() }
+            : baby
+        )
+      };
     default:
       return state;
   }
