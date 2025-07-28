@@ -22,7 +22,7 @@ const PARENT_USERS = [
     id: 1,
     parentCode: 'PARENT001',
     password: '1',
-    childName: 'נועה'
+    childName: 'דין'
   },
   {
     id: 2,
