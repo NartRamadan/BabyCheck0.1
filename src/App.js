@@ -11,7 +11,7 @@ import BabyProfile from './components/BabyProfile';
 const initialBabies = [
   {
     id: 1,
-    name: 'נועה',
+    name: 'דין',
     parentCode: 'PARENT001',
     activities: {
       morningMeal: false,
