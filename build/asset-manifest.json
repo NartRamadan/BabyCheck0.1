@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BabyCheck0.1/static/css/main.e6f4789b.css",
+    "main.js": "/BabyCheck0.1/static/js/main.2cf63079.js",
+    "index.html": "/BabyCheck0.1/index.html",
+    "main.e6f4789b.css.map": "/BabyCheck0.1/static/css/main.e6f4789b.css.map",
+    "main.2cf63079.js.map": "/BabyCheck0.1/static/js/main.2cf63079.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6f4789b.css",
+    "static/js/main.2cf63079.js"
+  ]
+}
